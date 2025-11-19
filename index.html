@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Con Só May Mắn – Giành Cho Giáo Viênc</title>
+
+<meta name="description" content="Website quay số lên trả bài dành cho giáo viên, giao diện chủ đề trường học cực đẹp.">
+<meta name="keywords" content="chọn số trả bài, bảng quay số, random học sinh, giáo viên, trường học">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    margin:0;
+    padding:0;
+    background: linear-gradient(135deg, #a8d8ff, #fce1ff);
+    text-align:center;
+    color:#333;
+}
+
+h1 {
+    margin-top: 30px;
+    font-size: 36px;
+    color: #2d2d2d;
+    text-shadow: 1px 1px 3px #fff;
+}
+
+.sub-title {
+    margin-top: -5px;
+    font-size: 16px;
+    color: #444;
+    font-weight: 600;
+}
+
+/* Bảng số ngang, gọn */
+.grid {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+}
+
+.number {
+    background: #ffffffdd;
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: 0.25s;
+}
+
+.number:hover {
+    background: #ffe8a6;
+    transform: scale(1.12);
+}
+
+/* Nút chọn số */
+button {
+    margin-top: 15px;
+    padding: 12px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ff9800, #ffca28);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* Kết quả */
+.result-box {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #d32f2f;
+    text-shadow: 1px 1px 3px #fff;
+}
+
+/* Footer */
+.footer {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #333;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<h1>Con Số May Mắn 📚🎓</h1>
+<div class="sub-title">Chúc Mấy Bạn , Và Cô Có Một Ngày Giảng Dạy , Và Học Tập Đầy Năng Lượng!
+</div>
+
+<!-- Bảng số -->
+<div class="grid" id="numberGrid"></div>
+
+<!-- Nút chọn số -->
+<button onclick="rollNumber()">🎲 Chọn Số Ngẫu Nhiên</button>
+
+<!-- Kết quả -->
+<div class="result-box" id="result">Số được chọn sẽ hiển thị ở đây</div>
+
+<!-- Tiếng vỗ tay -->
+<audio id="clapSound">
+    <source src="https://www.soundjay.com/human/applause-8.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Render số 1-100
+const grid = document.getElementById('numberGrid');
+for(let i=1;i<=100;i++){
+    const div = document.createElement('div');
+    div.className = 'number';
+    div.textContent = i;
+    grid.appendChild(div);
+}
+
+// Chọn số ngẫu nhiên
+function rollNumber(){
+    const numbers = document.querySelectorAll('.number');
+    const resultBox = document.getElementById('result');
+    const clap = document.getElementById("clapSound");
+
+    let count = 0;
+    let interval = setInterval(()=>{
+        numbers.forEach(n=>n.style.background='#ffffffdd');
+        let tempNum = Math.floor(Math.random()*100);
+        numbers[tempNum].style.background='#ffe8a6';
+        resultBox.textContent = "Đang chọn... 👉 " + (tempNum+1);
+        clap.currentTime = 0; // chạy lại từ đầu
+        clap.play();
+        count++;
+        if(count>25){ // chạy khoảng 25 lần rồi dừng
+            clearInterval(interval);
+            let finalNum = Math.floor(Math.random()*100);
+            numbers.forEach(n=>n.style.background='#ffffffdd');
+            numbers[finalNum].style.background='#ffeb3b';
+            resultBox.innerHTML = "🎉 Cô mời số <b>" + (finalNum+1) + "</b> lên bảng trả bài! 🎉";
+            clap.currentTime = 0;
+            clap.play(); // tiếng vỗ tay cuối
+        }
+    },70);
+}
+</script>
+
+<!-- Footer -->
+<div class="footer">
+   
+</div>
+
+</body>
+</html>
