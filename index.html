@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Con Số May Mắn – Giành Cho Giáo Viênc</title>
+<title>Bốc Số Trả Bài – Chủ Đề Trường Học</title>
 
 <meta name="description" content="Website quay số lên trả bài dành cho giáo viên, giao diện chủ đề trường học cực đẹp.">
 <meta name="keywords" content="chọn số trả bài, bảng quay số, random học sinh, giáo viên, trường học">
@@ -34,7 +34,7 @@ h1 {
     font-weight: 600;
 }
 
-/* Bảng số gọn ngang */
+/* Bảng số ngang, gọn */
 .grid {
     width: 90%;
     max-width: 600px;
@@ -101,8 +101,8 @@ button:hover {
 </head>
 <body>
 
-<h1>CON SỐ MAY MẮN 📚🎓</h1>
-<div class="sub-title">Chúc Mấy Bạn , Và Cô Có Một Ngày Giảng Dạy , Và Học Tập Đầy Năng Lượng!</div>
+<h1>Bốc Số Trả Bài 📚🎓</h1>
+<div class="sub-title">Cô mời học sinh lên bảng trả bài một cách lịch sự!</div>
 
 <!-- Bảng số -->
 <div class="grid" id="numberGrid"></div>
@@ -140,14 +140,16 @@ function rollNumber(){
         let tempNum = Math.floor(Math.random()*100);
         numbers[tempNum].style.background='#ffe8a6';
         resultBox.textContent = "Đang chọn... 👉 " + (tempNum+1);
-        clap.play(); // phát tiếng vỗ tay liên tục
+        clap.currentTime = 0; // chạy lại từ đầu
+        clap.play();
         count++;
         if(count>25){ // chạy khoảng 25 lần rồi dừng
             clearInterval(interval);
             let finalNum = Math.floor(Math.random()*100);
             numbers.forEach(n=>n.style.background='#ffffffdd');
             numbers[finalNum].style.background='#ffeb3b';
-            resultBox.innerHTML = "🎉 Cô mời số <b>" + (finalNum+1) + "</b> lên trả bài / Làm bài tập 🎉";
+            resultBox.innerHTML = "🎉 Cô mời số <b>" + (finalNum+1) + "</b> lên bảng trả bài! 🎉";
+            clap.currentTime = 0;
             clap.play(); // tiếng vỗ tay cuối
         }
     },70);
@@ -156,7 +158,7 @@ function rollNumber(){
 
 <!-- Footer -->
 <div class="footer">
-    Website Được Vận Hành Bởi Học Trò Của Cô: <b style="color:#d12a2a;">Quảng Thị Phương</b> ❤️
+   
 </div>
 
 </body>
